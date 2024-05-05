@@ -1,8 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.18;
 
+/**
+ * @title ImplementationContract
+ * @dev This is an Implementation contract that includes a transfer function.
+ * 
+ */
+
 contract ImplementationContract {
-    // Simulate a token contract by storing balances
+    // A mapping from address to keep a track of balances.
     mapping(address => uint256) public balances;
 
     // Event to log transfers
