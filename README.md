@@ -54,6 +54,18 @@ A fallback function in Solidity is a special function that is executed when a co
 
 The assembly block in a Solidity contract refers to a section of the contract where low-level assembly language instructions are written. Assembly language provides direct access to the Ethereum Virtual Machine (EVM) and allows for operations that are not directly supported by Solidity's high-level syntax. While Solidity abstracts away many of the complexities of the EVM, the assembly block can be used for performance optimizations, complex computations, or when interacting with other contracts in a very specific way.
 
+- How does the EVM(Ethereum Virtual Machine) stores the variables?
+
+The Ethereum Virtual Machine (EVM) stores data in a system of storage slots, each capable of holding 256 bits (32 bytes) of data. These slots are numbered from 0 to (2^{256} - 1), allowing for a vast addressable space. When a contract needs to store data, it writes to a specific storage slot using a key-value pair, where the key is the slot's index and the value is the data. Initially, all slots are set to 0, indicating that explicit writing is required to store data. Accessing storage slots can be costly in terms of gas fees, emphasizing the importance of efficient storage management. Storage slots are referenced using their keccak256 hash, especially for Merkel Patricia Trees (MPTs), providing a standardized way to reference variable-length key values.
+
+![Slot Storage](/public/EVM%20Storage%20slots.png)
+
+- What is the function selector in EVM and its importance?
+
+In the Ethereum Virtual Machine (EVM), a function selector is a unique identifier for each function within a smart contract. It serves as the key that allows the EVM to determine which function to execute when a transaction is initiated. Function selectors are automatically generated in Solidity for each function using a 4-byte hash derived from the function's name and parameter types. This mechanism enables the EVM to differentiate between various functions and execute the correct one.
+
+![Function Selector](/public/Function%20selectorDiagram.drawio.png)
+
 ## Implemention 
 
 I am using Foundry toolkit for the development.
