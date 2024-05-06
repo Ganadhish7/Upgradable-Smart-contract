@@ -5,6 +5,8 @@
 - [Introduction](#introduction)
   - [Architecture](#architecture)
   - [Implementation](#implementation)
+  - [Challenges](#challenges)
+    - [Solutions](#solutions)
   - [Interaction](#interaction)
 - [Getting Started](#getting-started)
   - [Requirements](#requirements)
@@ -176,6 +178,37 @@ Receive Function: The receive function is a placeholder to simulate receiving to
      }
 ```
 
+## Challenges
+
+Faced few challenges while implementing the `fallback()` function in the `ProxyContract.sol`.
+I was doing the delegationcall directly, without going into the low level in EVM, Which was causing the large gas consumption.
+It took me a while to find the issue.
+
+
+### Solutions 
+
+To solve the problem above, Solidity provides a code block called assembly. 
+Assembly is a low level language to access the Ethereum Virtual Machine at low level.
+By implementing the assembly block in fallback function I was able reduce the gas consumption, and Optimize it.
+
+```shell
+     assembly {
+        // copy s/(calldatesize()) bytes from calldata at position f/(0) to memory at position t/(ptr)
+        calldatacopy(0, 0, calldatasize())
+
+        // Delegate the call to the implementation contract
+        let result := delegatecall(gas(), implementation, 0, calldatasize(), 0, 0)
+
+        // copy s/(size) bytes from returndata at position f/(0) to mem at position t/(ptr)
+        returndatacopy(0, 0, returndatasize())
+
+        // Handle the result of the delegatecall
+        switch result
+        case 0 {revert(0, returndatasize())} // If delegatecall failed, revert with the returned data
+        default {return(0, returndatasize())}  // otherwise return the result
+    }
+```
+
 ## Interaction
 
 ## Requirements 
@@ -186,7 +219,6 @@ Receive Function: The receive function is a placeholder to simulate receiving to
 Foundry consists of:
 
 -   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
 -   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
 
 ## Documentation
