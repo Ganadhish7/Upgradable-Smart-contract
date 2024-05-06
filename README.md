@@ -521,25 +521,17 @@ Deployed to: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 Transaction hash: 0xb3259b52c40256695457c26181d4fddcdbd7258dfa16ef30c5def3b02e977b2f
 ```
 
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
 ### Help
 
 ```shell
 $ forge --help
 $ anvil --help
-$ cast --help
 ```
 
 ## Quickstart 
 
 ```shell
 git clone https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview.git
-cd foundry-erc20-f23
 forge install 
 forge build
 ```
