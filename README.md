@@ -18,7 +18,7 @@
 
 A proxy contract is a contract that acts as an intermediary between the end user and the actual logic contract (implementation contract). It stores the states of the current implementation contract and forwards calls to it. Proxy contracts are used for upgradability because they allow the logic contract to be swapped out without changing the contract's address, and preserving its state and interactions.
 
-![Proxy Contract](public/Proxy%20architecture.drawio.png)
+![Proxy Contract](/public/Proxy%20architecture.drawio.png)
 
 - What is an Upgradable Smart contract?
 
@@ -44,7 +44,7 @@ An implementation contract (also known as a logic contract) contains the actual 
 
 The delegatecall function is a low-level function in Solidity that allows a contract to execute code from another contract while preserving the context of the calling contract. This means that the called contract's code is executed in the context of the calling contract, including using its storage and message sender. This feature is particularly useful in upgradable smart contracts, where it allows the proxy contract to delegate calls to the implementation contract while maintaining the original contract's state and identity.
 
-![delegatecall](public/Delegate%20call%20architecture.drawio.png)
+![delegatecall](/public/Delegate%20call%20architecture.drawio.png)
 
 - What is a fallback function?
 
