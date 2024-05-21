@@ -1,4 +1,4 @@
-## Task 2: Proxy Contract for Load Balancing and Function Delegation
+## Upgradable Proxy Contract for Load Balancing and Function Delegation
 
 # Index
 
@@ -24,15 +24,15 @@ A proxy contract is a contract that acts as an intermediary between the end user
 
 - What is an Upgradable Smart contract?
 
-Proxy contract is a type of Upgradable smart contract, An Upgradable smart contract is a type of smart contract that allows for changes to its business logic while preserving its state. Upgradability is achieved by using few patterns like proxy contracts, implementation contracts. These methods enable the creation of new versions of the contract or the delegation of function calls to different contracts, allowing for modification of the contract's behavior without changing its address or state.
+A proxy contract is a type of Upgradable smart contract, An Upgradable smart contract is a type of smart contract that allows for changes to its business logic while preserving its state. Upgradability is achieved by using a few patterns like proxy contracts, and implementation contracts. These methods enable the creation of new versions of the contract or the delegation of function calls to different contracts, allowing for modification of the contract's behavior without changing its address or state.
 
 - What are the types of Upgradable smart contracts?
 
 There are several types of upgradable smart contracts, primarily distinguished by the proxy pattern they use:
 
-1. Migrations: This type of upgrading a smart contract is to deploy a new smart contract on the blockchain and telling the users to not use the old one and shift to the new smart contract, which might left few users keep using the old version and not getting informed about the currently upgraded contract.
+1. Migrations: This type of upgrading a smart contract is to deploy a new smart contract on the blockchain and tell the users to not use the old one and shift to the new smart contract, which might leave few users using the old version and not getting informed about the currently upgraded contract.
 
-2. Transparent Proxy: This pattern involves a proxy contract that forwards calls to an implementation contract. The proxy contract stores the address of the current implementation contract and delegates calls to it. When an upgrade is needed, a new implementation contract is deployed, and the proxy contract's address is updated to point to the new contract. This method is straightforward but requires the proxy contract to be aware of the implementation contract's address.
+2. Transparent Proxy: This pattern involves a proxy contract that forwards calls to an implementation contract. The proxy contract stores the address of the current implementation contract and delegates call to it. When an upgrade is needed, a new implementation contract is deployed, and the proxy contract's address is updated to point to the new contract. This method is straightforward but requires the proxy contract to be aware of the implementation contract's address.
 
 3. UUPS (Universal Upgradeable Proxy Standard): This is a more advanced pattern that allows for upgrades without changing the proxy contract's address. It uses a mechanism where the proxy contract itself can be upgraded, enabling the storage of the new implementation contract's address within the proxy. This pattern provides greater flexibility and security compared to the transparent proxy pattern.
 
@@ -78,7 +78,6 @@ According to the Proxy contract design from Task Description, Following is the P
 
 I have used transparent proxy pattern, as it supports the update functionalities and also restrict the functionalities to the Owner or Admin only.
 
-- [Proxy Contract](https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview/blob/master/src/ProxyContract.sol)
 
 This proxy contract also supports adding new implementation address, and deleting a specific implementation address. 
 
@@ -135,8 +134,6 @@ Contract has a fallback function that takes a functionSelector as input and dele
 - 2. Implementation Contract (`src/ImplementationContract.sol`)
 
 An Implementation contract has two functions transferTokens and receiveTokens.
-
-- [Implementation Contract](https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview/blob/master/src/ImplementationContract.sol)
 
 Balances Mapping: The contract maintains a mapping of balances to track the token balance of each address.
 
@@ -236,8 +233,6 @@ $ forge build
 ### Test
 
 - Testing the contract (`test/ProxyTest.t.sol`)
-
-- [ProxyTest Contract](https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview/blob/master/test/ProxyTest.t.sol)
 
 This Contract is for testing the functionalities of a proxy contract.
 
@@ -454,10 +449,6 @@ Forge also provies deploying smart contracts using scripts.
 
 Deploying using script provides additional insights. 
 
-- [ProxyContract Script](https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview/blob/master/script/ProxyContract.s.sol)
-
-- [ImplementationContract Script](https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview/blob/master/script/ImplementationContract.s.sol)
-
 First start Anvil:
 ```shell
 $ anvil
@@ -531,7 +522,7 @@ $ anvil --help
 ## Quickstart 
 
 ```shell
-git clone https://github.com/Ganadhish7/Wasserstoff-Task2-2024-Blockchain-Interview.git
+git clone https://github.com/Ganadhish7/Upgradable-Smart-contract.git
 forge install 
 forge build
 ```
